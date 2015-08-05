@@ -1,0 +1,27 @@
+<apex:page controller="displayContractsController" tabStyle="Project__c">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Project Details">
+                Project Number<apex:outputText value="{!projectNumber}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Choose Option">
+                <apex:selectList value="{!otherShipmentOption}" size="1">
+                    <apex:selectOptions value="{!options}"/>
+                    <apex:actionSupport event="onchange" action="{!redirect}" />
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Choose Support Contract">
+                <apex:pageBlockTable value="{!leftOutSupportContract}" var="sc">
+                    <apex:column ><apex:commandLink value="{!sc.Id}" action="{!save}">
+                        <apex:param name="cid" value="{!sc.Id}"/></apex:commandLink></apex:column>
+                    <apex:column value="{!sc.Name}"/>
+                    <apex:column value="{!sc.Contract_Name__c}"/>
+                    <apex:column value="{!sc.Duration__c}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

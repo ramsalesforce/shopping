@@ -1,0 +1,19 @@
+<apex:page controller="HomePageController">
+<apex:form >
+  <apex:pageBlock >
+      <apex:pageBlockSection >
+          <apex:inputTextarea value="{!address}" label="Address">
+              <apex:param name="address" value="{!address}" assignTo="{!address}"/>
+          </apex:inputTextarea>
+          <apex:selectList value="{!modeOfPayment}" label="Mode Of Payment" size="1">
+              <apex:selectOptions value="{!paymentOption}">
+              </apex:selectOptions>
+              <apex:param name="modeOfPayment" value="{!modeOfPayment}" assignTo="{!modeOfPayment}"/>
+          </apex:selectList>
+      </apex:pageBlockSection>
+      <apex:commandLink value="Place Order" action="{!buyAllProductsInCart}">
+      </apex:commandLink>&nbsp;&nbsp;
+      <apex:commandLink value="Cancel" action="{!cancel}"/>
+  </apex:pageBlock>
+</apex:form>  
+</apex:page>

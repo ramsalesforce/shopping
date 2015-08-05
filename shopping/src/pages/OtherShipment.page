@@ -1,0 +1,18 @@
+<apex:page controller="OtherShipmentController" docType="html-5.0" tabStyle="Project__c">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Project Details">
+                Project Number<apex:outputText value="{!projectNumber}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Other Shipment Details">
+                Shipment Type<apex:outputText value="{!shipmentType}"/>
+                Date<apex:input type="date"  value="{!startDate}"/> 
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockbuttons >
+            	<apex:commandButton value="save" action="{!save}"/>
+            </apex:pageBlockbuttons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

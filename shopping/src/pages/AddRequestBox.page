@@ -1,0 +1,19 @@
+<apex:page controller="HomePageController">
+  <apex:form >
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+              <apex:inputField value="{!requestBox.Shirt_Type__c}"/>
+              <apex:inputField value="{!requestBox.Trouser_Type__c}"/>
+              <apex:inputField value="{!requestBox.Outwear__c}"/>
+              <apex:inputField value="{!requestBox.Accessories__c}"/>
+              <apex:inputField value="{!requestBox.Purpose__c}"/>
+              <apex:inputField value="{!requestBox.Date__c}"/>
+              <apex:inputField value="{!requestBox.Notes_and_Comments__c}"/>
+          </apex:pageBlockSection>
+          <apex:pageBlockButtons >
+              <apex:commandButton value="Save" action="{!saveRequestBoxes}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

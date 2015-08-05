@@ -1,0 +1,32 @@
+<apex:component controller="HomePageController" allowDML="true">
+  <apex:pageBlock >
+                <apex:pageBlockTable value="{!request}" var="r">
+                    <apex:column headerValue="Action">
+                        <apex:outputLink value="/apex/EditRequestBox?rid={!r.id}&aid={!r.Account__c}">Edit</apex:outputLink>&nbsp;|&nbsp;
+                        <apex:outputLink value="/apex/DeleteRequestBox?rid={!r.id}&aid={!r.Account__c}" onclick="if(!confirm('Are you sure?')){return false;}">Delete</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!r.Shirt_Type__c}"/>
+                    <apex:column value="{!r.Trouser_Type__c}"/>
+                    <apex:column value="{!r.Outwear__c}"/>
+                    <apex:column value="{!r.Accessories__c}"/>
+                    <apex:column value="{!r.Purpose__c}"/>
+                    <apex:column value="{!r.Date__c}"/>
+                    <apex:column value="{!r.Notes_and_Comments__c}"/>
+                    <apex:column headerValue="Suggestions">
+                        <apex:commandLink value="View" action="{!displayProductForRequestBox}" reRender="SuggestedProductDetailsForRequestBox">
+                            <apex:param name="rid" value="{!r.id}" assignTo="{!rId}"/>
+                        </apex:commandLink>
+                    </apex:column>                   
+                </apex:pageBlockTable>
+                <apex:outputPanel id="SuggestedProductDetailsForRequestBox">
+                    <apex:pageBlockTable value="{!productForRB}" var="pro">
+                        <apex:column value="{!pro.ProductCode}"/>
+                        <apex:column value="{!pro.Name}"/>
+                        <apex:column >
+                            <apex:outputLink value="/apex/ShowProductDetails?pid={!pro.Id}&aid={!account.Id}">View</apex:outputLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+                <apex:commandButton style="float:left" value="Add RequestBox" action="{!addRequestBox}"/>
+            </apex:pageBlock>
+</apex:component>

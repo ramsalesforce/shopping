@@ -1,0 +1,31 @@
+<apex:component controller="HomePageController" allowDML="true">
+ <apex:pageBlock >
+                <apex:pageBlockTable value="{!outfit}" var="o">
+                    <apex:column headerValue="Action">
+                        <apex:outputLink value="/apex/EditOutfitDetails?oid={!o.id}&aid={!o.Account__c}">Edit</apex:outputLink>&nbsp;|&nbsp;
+                        <apex:outputLink value="/apex/DeleteOutfitDetails?oid={!o.id}&aid={!o.Account__c}" onclick="if(!confirm('Are you sure?')){return false;}">Delete</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!o.Shirt_Size__c}"/>
+                    <apex:column value="{!o.Trouser_Length__c}"/>
+                    <apex:column value="{!o.Waist__c}"/>
+                    <apex:column value="{!o.Outfit_Type__c}"/>
+                    <apex:column value="{!o.Pant_Shape__c}"/>
+                    <apex:column value="{!o.Shirt_Shape__c}"/>
+                    <apex:column headerValue="Suggestions">
+                        <apex:commandLink value="View" action="{!displayProducts}" reRender="SuggestedProductDetails">
+                            <apex:param name="oid" value="{!o.id}" assignTo="{!oId}"/>
+                        </apex:commandLink>
+                    </apex:column> 
+                </apex:pageBlockTable>
+                <apex:outputPanel id="SuggestedProductDetails">
+                    <apex:pageBlockTable value="{!products}" var="product">
+                        <apex:column value="{!product.ProductCode}"/>
+                        <apex:column value="{!product.Name}"/>
+                        <apex:column >
+                            <apex:outputLink value="/apex/ShowProductDetails?pid={!product.Id}&aid={!account.Id}">View</apex:outputLink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+                <apex:commandButton style="float:left" value="Add Outfit" action="{!addOutfit}"/>
+           </apex:pageBlock>
+</apex:component>

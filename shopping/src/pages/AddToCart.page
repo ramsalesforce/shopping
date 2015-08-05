@@ -1,0 +1,22 @@
+<apex:page controller="HomePageController" tabStyle="My_Order__c">
+<apex:pageMessages id="myMsg"></apex:pageMessages>
+<apex:form >
+
+  <apex:pageBlock >
+      <apex:pageBlockSection >
+          <apex:outputField value="{!cartItem.Account__c}"/>
+          <apex:outputField value="{!cartItem.Product__c}"/>
+          <apex:inputField value="{!cartItem.Shirt_Size__c}" rendered="{!(cartItem.Type__c == 'T Shirts' || cartItem.Type__c == 'Formal Shirts' || cartItem.Type__c == 'Casual Shirts' || cartItem.Type__c == 'Night Wears')}"/>
+          <apex:inputField value="{!cartItem.Waist__c}" rendered="{!(cartItem.Type__c == 'Jeans' || cartItem.Type__c == 'Formal Pants' || cartItem.Type__c == 'Night Wears')}"/>
+          <apex:inputField value="{!cartItem.Quantity__c}"/>
+          <apex:outputField value="{!cartItem.Unit_Price__c}"/>
+          <apex:inputField value="{!cartItem.Color__c}"/>
+      </apex:pageBlockSection>
+      <apex:commandButton value="Back" action="{!cancel}" style="float:left"/>
+      <apex:commandButton value="Cancel" action="{!cancel}" style="float:right"/>
+      <apex:commandButton value="Add" action="{!addToCart}" style="float:right"/>
+      
+  </apex:pageBlock>
+  
+</apex:form>
+</apex:page>

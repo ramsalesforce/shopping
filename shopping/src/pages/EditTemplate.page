@@ -1,0 +1,18 @@
+<apex:page standardController="CaseTemplate__c" extensions="EditTemplateController" tabStyle="CaseTemplate__c">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>        
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Create Case Template">
+                <apex:inputField value="{!caseTemplateObj.Name}"/>
+                <apex:inputField value="{!caseTemplateObj.Case_Subject__c}"/>
+                <apex:inputField value="{!caseTemplateObj.Status__c}" required="true"/>
+                <apex:inputField value="{!caseTemplateObj.Case_Origin__c}" required="true"/>
+                <apex:inputField value="{!caseTemplateObj.Type__c}"/>
+                <apex:inputField value="{!caseTemplateObj.Description__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,65 @@
+<apex:page controller="ProductRelatedListController">
+    <apex:form >
+              
+        <apex:pageBlock id="pb">
+            Search Product<apex:inputText value="{!inputText}" /><apex:commandButton value="Go" action="{!searchresult}" reRender="pb"/>
+            <!-- alphabet selection -->
+                <span style="float: right; margin: 5px 5px 5px 5px;">  <apex:repeat value="{!AlphaList}" var="a">
+                      <apex:commandLink value="{!a}" action="{!BuildQuery}" rerender="pb" >
+                         <apex:param name="AlphaFilter" value="{!a}" assignTo="{!AlphaFilter}"/>
+                      </apex:commandLink>&nbsp;&nbsp;&nbsp;
+                   </apex:repeat>
+                </span>
+            <apex:pageBlockSection title="Product List">
+                <apex:pageBlockTable value="{!products}" var="prod">
+                    <apex:column headerValue="Select">
+                        <apex:inputCheckbox value="{!products[prod].productState}">
+                            <apex:actionSupport action="{!addProduct}" event="onclick" status="proStatus" reRender="productPanel" >
+                               <apex:param name="pid" value="{!products[prod].productObj.id}"/>
+                            </apex:actionSupport>
+                        </apex:inputCheckbox>
+                    </apex:column>
+                    
+                    <apex:column value="{!products[prod].productObj.Name}" />
+                    <apex:column value="{!products[prod].productObj.ProductCode}" />
+                    <apex:column value="{!products[prod].productObj.Family}" />
+                </apex:pageBlockTable>
+           </apex:pageBlockSection>
+                                 
+           <apex:panelGrid columns="7">
+               <apex:commandButton status="fetchStatus" reRender="pb" value="|<" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page"/>
+               <apex:commandButton status="fetchStatus" reRender="pb" value="<" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page"/>
+               <apex:outputText >{!(setCon.pageNumber * size)+1-size}-{!IF((setCon.pageNumber * size)>noOfRecords, noOfRecords,(setCon.pageNumber * size))} of {!noOfRecords}</apex:outputText>
+               <apex:commandButton status="fetchStatus" reRender="pb" value=">" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page"/>
+               <apex:commandButton status="fetchStatus" reRender="pb" value=">|" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page"/>
+               
+               <!--<apex:commandButton status="fetchStatus" reRender="pb" value="Refresh" action="{!refresh}" title="Refresh Page"/>-->
+               <apex:outputPanel >
+                   <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/>
+               </apex:outputPanel>
+           </apex:panelGrid>
+            
+           <apex:pageBlockButtons >
+                    <apex:commandButton value="Save" action="{!save}" />
+                    <apex:commandButton value="Cancel" action="{!cancel}"/>
+           </apex:pageBlockButtons>
+       
+        
+       
+            <apex:outputPanel title="Selected Product List" id="productPanel">
+                <apex:actionStatus id="proStatus" startText="Loading....">
+                   <apex:facet name="stop">
+                    <apex:pageBlockTable value="{!selectedProducts}" var="spro">
+                        <apex:column value="{!selectedProducts[spro].Name}" />
+                        <apex:column value="{!selectedProducts[spro].ProductCode}" />
+                        <apex:column value="{!selectedProducts[spro].Family}" />
+                    </apex:pageBlockTable>
+                    </apex:facet>
+                  </apex:actionStatus>
+                </apex:outputPanel>
+            
+          </apex:pageBlock>
+        
+        
+    </apex:form>
+</apex:page>

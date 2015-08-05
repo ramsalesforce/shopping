@@ -1,0 +1,10 @@
+<apex:page >
+    <c:importvisualstrap />
+    <c:visualstrapblock >
+        <apex:pageBlock title="Select Shirt Shape">
+            <apex:outputLink value="/apex/welcome"><apex:image value="{!$Resource.relaxedcut}" width="400" height="400" title="Relaxed Fit"/></apex:outputLink>&nbsp;&nbsp;
+            <apex:outputLink value="/apex/welcome"><apex:image value="{!$Resource.slimcut}" width="400" height="400" title="Slim Fit"/></apex:outputLink>&nbsp;&nbsp;
+            <apex:outputLink value="/apex/welcome"><apex:image value="{!$Resource.straightcut}" width="400" height="400" title="Straight Fit"/></apex:outputLink>&nbsp;&nbsp;
+        </apex:pageBlock>
+    </c:visualstrapblock>
+</apex:page>

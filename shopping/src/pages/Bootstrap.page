@@ -1,0 +1,73 @@
+<apex:page standardController="Account" extensions="accountController" docType="html-5.0" sidebar="false">
+    <head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+       
+    </head>
+    
+    <apex:form >
+        
+        <apex:pageBlock >
+            <div class="panel panel-primary">
+                <apex:pageBlockSection title="Account Information">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Owner"/>
+                        <c:AutoComplete allowClear="true" importJquery="true" labelField="Name" SObject="User" valueField="Id" targetField="{!account.OwnerId}" style="width:200px"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:inputField value="{!account.Name}" styleClass="form-control"/>
+                    <apex:inputField value="{!account.Rating}"/>
+                    <apex:inputField value="{!account.Phone}"/>
+                    <apex:inputField value="{!account.AccountNumber}" required="true" styleClass="form-control"/>
+                    <!--<apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Parent"/>
+                        <c:AutoComplete allowClear="true" importJquery="true" labelField="Name" SObject="Account" valueField="Id" targetField="{!account.parentId}" style="width:200px"/>
+                    </apex:pageBlockSectionItem>-->
+                    <!--<apex:selectList size="1" value="{!account.Parentid}" multiselect="false">
+                        <apex:selectOptions value="{!accountOption}"></apex:selectOptions>
+                    </apex:selectList>--> 
+                    <apex:inputField value="{!account.Website}"/>
+                                       
+                    <apex:PageBlockSectionItem >
+                        <apex:outputLabel value="Type"/>
+                        <apex:actionRegion >
+                            <apex:inputField value="{!Account.Type}"  >
+                                <apex:actionSupport event="onchange" reRender="hideAddress" />
+                            </apex:inputfield> 
+                        </apex:actionRegion>
+                    </apex:PageBlockSectionItem>
+                    <apex:inputField value="{!account.Industry}" required="true" styleClass="form-control"/>
+               </apex:pageBlockSection>
+           </div>
+
+            <div class="panel panel-primary">
+                <apex:outputPanel id="hideAddress" >
+                    <apex:pageBlockSection title="Address Information" rendered="{!Account.Type!='Other'}" >
+                        <apex:inputField value="{!account.BillingStreet}"/>
+                        <apex:inputField value="{!account.BillingCity}"/>
+                        <apex:inputField value="{!account.BillingState}"/>
+                        <apex:inputField value="{!account.BillingCountry}"/>
+                        <apex:inputField value="{!account.ShippingCity}"/>
+                        <apex:inputField value="{!account.ShippingCountry}"/>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Parent"/>
+                        <c:AutoComplete allowClear="true" importJquery="true" labelField="Name" SObject="Account" valueField="Id" targetField="{!account.parentId}" style="width:200px"/>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+            </div>
+            <div class="panel panel-primary">
+                <apex:pageBlockSection title="Additional Information">
+                    <apex:inputField value="{!account.CustomerPriority__c}"/>
+                    <apex:inputField value="{!account.SLA__c}"/>
+                    <apex:inputField value="{!account.SLAExpirationDate__c}" type="date"/>
+                    <apex:inputField value="{!account.SLASerialNumber__c}"/>
+                </apex:pageBlockSection>
+            </div>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+    </apex:form>
+    
+</apex:page>

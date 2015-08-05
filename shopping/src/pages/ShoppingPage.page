@@ -1,0 +1,44 @@
+<apex:page controller="AccountExtensionController">
+<script>
+    var username,password;
+    function signIn(){
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+        alert(username);
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AccountExtensionController.signin}',
+             username,password,
+             function(result, event){
+                 if (event.status) {
+                     alert(result);
+                     window.location.href = result;
+                 }
+             },
+       {escape: true}
+       );
+   }
+</script>
+    <c:importvisualstrap />
+    <c:visualstrapblock >
+    <c:panel title="Online Shopping">
+    <apex:messages id="myMsg" />
+            <apex:form >
+                <apex:pageBlock >
+                    <apex:pageBlockSection >
+                        <!--<apex:inputText label="Username" value="{!Username}"/><br/>
+                        <apex:inputsecret label="Password" value="{!Password}"/>-->
+                        Username&nbsp;&nbsp;<input id="username" type="text"/><br/>
+                        Password&nbsp;&nbsp;<input id="password" type="password"/>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection >
+                        <!--<apex:commandButton value="Sign in" action="{!signin}"/><br/>-->
+                        <input type="button" value="Sign in" onclick="signIn();"/><br/>
+                    </apex:pageBlockSection>
+                    <c:label > Not Yet a Member of Online Shopping </c:label>
+                    <apex:outputLink value="/apex/RegistrationPage">&nbsp;Sign Up</apex:outputLink>&nbsp;here
+                </apex:pageBlock>
+            </apex:form>
+        </c:panel>
+    </c:visualstrapblock>
+</apex:page>

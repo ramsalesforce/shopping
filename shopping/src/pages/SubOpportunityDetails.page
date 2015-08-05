@@ -1,0 +1,19 @@
+<apex:page standardController="Opportunity" extensions="SubOpportunityDetailsController">
+	<apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Sub Opportunities Details">
+                <apex:pageBlockTable title="Sub Opportunities" value="{!Opportunities}" var="opp">
+                    <apex:column value="{!opp.Sub_Opp_Name__c}" />
+                    <apex:column value="{!opp.Sub_Opp_Type__c}"/>
+                    <apex:column value="{!opp.StageName}" />
+                    <apex:column value="{!opp.CloseDate}" />
+                    <apex:column >
+                        <apex:commandLink value="Edit/Remove" action="{!edit}">
+                        	<apex:param name="subOppId" value="{!opp.id}" />
+                        </apex:commandLink>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>    
+</apex:page>

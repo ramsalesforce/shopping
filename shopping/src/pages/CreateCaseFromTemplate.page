@@ -1,0 +1,74 @@
+<apex:page controller="GetTemplateList" tabStyle="Case">
+<c:visualstrapblock ><c:pageheader title="Select Template For Your Case" style="color: green; text-align: center; font-size: 20px" icon="check"/></c:visualstrapblock>
+    <apex:form >
+        <apex:pageBlock id="pb">
+            
+            <apex:pageBlockButtons >
+                    <c:buttongroup styleclass="btn btn-link"><apex:commandButton value="Add Template" action="{!createTemplate}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}"/></c:buttongroup>
+            </apex:pageBlockButtons>
+            <c:importvisualstrap />
+            <c:visualstrapblock >
+            <c:panel type="primary">
+                <!--<c:label > Search&nbsp;&nbsp;</c:label>--><apex:inputText value="{!searchText}" onkeyup="search()"/><c:glyph icon="search"/>
+                <apex:actionFunction name="search" action="{!search}" reRender="focus"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <c:label >Filter By Type&nbsp;&nbsp;</c:label><apex:selectList value="{!selectedFilter}" label="Filter" size="1" onchange="searchTextContext()">
+                    <apex:selectOptions value="{!filterOptions}"></apex:selectOptions>
+                </apex:selectList>
+                <apex:actionfunction name="searchTextContext" action="{!searchTextContent}" reRender="focus"/>
+                
+                <span style="float: right; margin: 5px 5px 5px 5px;">
+                    <apex:repeat value="{!AlphaList}" var="a">
+                        <apex:commandLink value="{!a}" action="{!BuildQuery}" rerender="pb" >
+                            <apex:param name="AlphaFilter" value="{!a}" assignTo="{!AlphaFilter}"/>
+                        </apex:commandLink>&nbsp;&nbsp;&nbsp;
+                    </apex:repeat>
+                </span>
+               
+                
+                
+                    <apex:pageBlockTable value="{!templateList}" var="tl" id="focus">
+                        <apex:column headerValue="Action"><apex:outputLink value="/apex/EditTemplate?id={!tl.id}">Edit</apex:outputlink>&nbsp;|&nbsp;<a href="/apex/DeleteTemplate?id={!tl.id}">Delete</a></apex:column>
+                        <apex:column headerValue="Name">
+                            <apex:facet name="header">
+                                <apex:commandLink action="{!sortData}" value="Name{!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}">
+                                    <apex:param value="Name" assignTo="{!sortExpression}"></apex:param>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputlink value="/apex/CreateCase?id={!tl.id}">
+                                <apex:outputText >{!tl.Name}</apex:outputText> 
+                            </apex:outputlink>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">
+                                <apex:commandLink action="{!sortData}" value="Subject{!IF(sortExpression=='Case_Subject__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                                    <apex:param value="Case_Subject__c" assignTo="{!sortExpression}"></apex:param>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputText >{!tl.Case_Subject__c}</apex:outputText> 
+                        </apex:column>
+                        <apex:column headerValue="Type" value="{!tl.Type__c}"/>
+                        <apex:column headerValue="Status" value="{!tl.Status__c}"/>
+                        <apex:column headerValue="Origin" value="{!tl.Case_Origin__c}"/>
+                        <apex:column headerValue="Description" value="{!tl.Description__c}"/>
+                        <apex:column headerValue="Created By" value="{!tl.CreatedBy.Name}"/>
+                    </apex:pageBlockTable>
+                
+                            
+                
+                <apex:panelGrid columns="7" >
+                       <apex:commandButton status="fetchStatus" value="|<" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" rerender="pb"/>
+                       <apex:commandButton status="fetchStatus" value="<" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" rerender="pb"/>
+                       <apex:outputText >{!(setCon.pageNumber * size)+1-size}-{!IF((setCon.pageNumber * size)>noOfRecords, noOfRecords,(setCon.pageNumber * size))} of {!noOfRecords}</apex:outputText>
+                       <apex:commandButton status="fetchStatus" value=">" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" rerender="pb" />
+                       <apex:commandButton status="fetchStatus" value=">|" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" rerender="pb"/>
+                       
+                       <apex:outputPanel >
+                           <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/>
+                       </apex:outputPanel>
+                </apex:panelGrid>
+        </c:panel>
+        </c:visualstrapblock>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page >
+  <c:importvisualstrap />
+  <c:visualstrapblock >
+  <h1>Thank You for Registering with Us</h1>&nbsp;&nbsp;<apex:outputLink value="/apex/shoppingpage">Click here to go Login page</apex:outputLink>
+  </c:visualstrapblock>
+</apex:page>

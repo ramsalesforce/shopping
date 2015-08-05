@@ -1,0 +1,32 @@
+<apex:page controller="CreateCasecontroller" docType="html-5.0" tabStyle="Case">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Case Information">
+                    <apex:inputField value="{!caseData.OwnerId}"/>
+                    <apex:inputField value="{!caseData.Status}" required="true"/>
+                    <apex:inputField value="{!caseData.ContactId}"/>
+                    <apex:inputField value="{!caseData.Priority}"/>
+                    <apex:inputField value="{!caseData.AccountId}"/>
+                    <apex:inputField value="{!caseData.Origin}" required="true"/>
+                    <apex:inputField value="{!caseData.Type}"/>
+                    <apex:inputField value="{!caseData.Reason}"/>
+           </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Additional Information">
+                    <apex:inputField value="{!caseData.Product__c}"/>
+                    <apex:inputField value="{!caseData.EngineeringReqNumber__c}"/>
+                    <apex:inputField value="{!caseData.PotentialLiability__c}"/>
+                    <apex:inputField value="{!caseData.SLAViolation__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Description Information">   
+                    <apex:inputField value="{!caseData.Subject}"/>
+                    <apex:inputField value="{!caseData.Description}"/>
+            </apex:pageBlockSection>   
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

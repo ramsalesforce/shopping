@@ -1,0 +1,43 @@
+<apex:component controller="OppActController" access="global">
+   
+    <p>
+    <h1><b>Closed won opportunities in last week:::::{!closedOppCount}</b></h1>
+            <apex:dataTable value="{!closedOppList}" var="copp" border="1" cellpadding="4" width="100%">
+                <apex:column headerValue="Name" ><a href="https://ap2.salesforce.com/{!copp.id}">{!copp.Name}</a></apex:column>
+                <apex:column headerValue="Account Name" value="{!copp.Account.Name}" />
+                <apex:column headerValue="Stage" value="{!copp.StageName}" />
+                <apex:column headerValue="Close Date" value="{!copp.CloseDate}" />
+            </apex:dataTable>
+    </p>
+    
+    <p>
+    <h1><b>Open opportunities if they have any open activities:::::{!openOppActCount}</b></h1>
+            <apex:dataTable value="{!openOppActList}" var="copp" border="1" cellpadding="4" width="100%">
+                <apex:column headerValue="Name" ><a href="https://ap2.salesforce.com/{!copp.id}">{!copp.Name}</a></apex:column>
+                <apex:column headerValue="Account Name" value="{!copp.Account.Name}" />
+                <apex:column headerValue="Stage" value="{!copp.StageName}" />
+                <apex:column headerValue="Close Date" value="{!copp.CloseDate}" />
+            </apex:dataTable>
+    </p>
+    
+    <p>
+    <h1><b>Open opportunities with no activities:::::{!openOppNoActCount}</b></h1>
+            <apex:dataTable value="{!openOppNoActList}" var="copp" border="1" cellpadding="4" width="100%">
+                <apex:column headerValue="Name" ><a href="https://ap2.salesforce.com/{!copp.id}">{!copp.Name}</a></apex:column>
+                <apex:column headerValue="Account Name" value="{!copp.Account.Name}" />
+                <apex:column headerValue="Stage" value="{!copp.StageName}" />
+                <apex:column headerValue="Close Date" value="{!copp.CloseDate}" />
+            </apex:dataTable>
+    </p>
+    
+    <p>
+    <h1><b>Open Opportunities with all Closed activities:::::{!openOppClosedActCount}</b></h1>
+            <apex:dataTable value="{!openOppClosedActList}" var="copp" border="1" cellpadding="4" width="100%">
+                <apex:column headerValue="Name" ><a href="https://ap2.salesforce.com/{!copp.id}">{!copp.Name}</a></apex:column>
+                <apex:column headerValue="Account Name" value="{!copp.Account.Name}" />
+                <apex:column headerValue="Stage" value="{!copp.StageName}" />
+                <apex:column headerValue="Close Date" value="{!copp.CloseDate}" />
+            </apex:dataTable>
+    </p>
+    
+</apex:component>

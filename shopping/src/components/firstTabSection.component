@@ -1,0 +1,94 @@
+<apex:component controller="HomePageController" allowDML="true">
+    <!--<apex:outputText value="{!Onload}" escape="false"></apex:outputText>-->
+    Type&nbsp;<apex:selectList value="{!selectedType}" size="1">
+    <apex:selectOptions value="{!type}"/>
+        <apex:actionSupport action="{!displaySelectedProducts}" event="onchange" reRender="displayProducts"/>
+    </apex:selectList>
+    &nbsp;&nbsp;&nbsp;Cart Items::<output type="text" id="outputText"/>
+    <apex:pageMessages id="myMsg"></apex:pageMessages>    
+    <apex:pageBlock title="Product List" id="pageBlock"> 
+    <!--hidden field-->
+    <!--<apex:inputHidden value="{!accId}" id="accId"/> -->
+    <apex:outputPanel id="displayProducts">
+        <apex:selectCheckboxes value="{!brands}" style="float:right">
+            <apex:selectOptions value="{!items}"/>
+            <apex:actionSupport action="{!displaySelectedBrandProducts}" event="onclick" reRender="displayProducts"/>
+        </apex:selectCheckboxes>
+        
+        <apex:pageMessages id="myMsg"></apex:pageMessages>
+        <apex:repeat value="{!allProductsDemo}" var="allProDemo" id="repeat">
+            
+                <apex:image url="{!URLFOR($Action.Attachment.Download, allProDemo.Attachments[0].Id)}" width="200px" height="200px" />
+                <input type="button" value="Add To Cart" onclick="holdItem('{!allProDemo.Id}','{!account.Id}');" id="{!allProDemo.Id}"/>
+            
+        </apex:repeat>
+    </apex:outputPanel>
+    
+    <marquee><b><h1>Welcome to Online Shopping</h1></b></marquee>
+    </apex:pageBlock>
+    <script>
+        var count=0,accountId,productId;
+        var productList= [];
+        function holdItem(productId,accountId){
+            if(document.getElementById(productId).value == "Add To Cart"){
+                //productList.push(productId);
+                Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.HomePageController.addProduct}',
+                productId,accountId,
+                function(result, event){
+                    if (event.status) {
+                        alert("Item added to Cart");
+                    }
+                },
+                {escape: true}
+                );
+            count++;
+            document.getElementById(productId).value = "Remove From Cart";
+            }else{
+                //productList.pop(productId);
+                Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.HomePageController.removeProduct}',
+                productId,accountId,
+                function(result, event){
+                    if (event.status) {
+                        alert("Item removed from Cart");
+                    }
+                },
+                {escape: true}
+                );
+                count--;
+                document.getElementById(productId).value = "Add To Cart";
+            }
+            document.getElementById("outputText").value = count;
+        }
+        
+        window.onload = function(accountId){
+            //alert("Hello");
+            //alert(count);
+            accountId = '{!$CurrentPage.parameters.aid}';
+            //alert(accountId);
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.HomePageController.gatherProducts}',
+                accountId,
+                function(result, event){
+                //alert("result---"+result+" event "+event.status);
+                    if (event.status) {
+                        productList = result;
+                        
+                        for(var i=0; i<result.length;i++){
+                           count++;
+                           document.getElementById(productList[i].Product__c).value = "Remove From Cart"; 
+                           //alert(productList[i]);
+                           //alert(count);
+                        }
+                          
+                    }
+                    document.getElementById("outputText").value = count; 
+                },
+                {escape: true}
+            );
+            
+        }
+        
+    </script>    
+    </apex:component>

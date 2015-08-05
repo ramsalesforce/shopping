@@ -1,0 +1,46 @@
+<apex:page standardController="Outfit__c">
+<script>
+var accountName = "{!$CurrentPage.parameters.accountName}";
+var accountEmail = "{!$CurrentPage.parameters.accountEmail}";
+var accountPhone = "{!$CurrentPage.parameters.accountPhone}";
+var accountUsername = "{!$CurrentPage.parameters.accountUsername}";
+var accountPassword = "{!$CurrentPage.parameters.accountPassword}";
+function showdetails(){
+    var shirtSize = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.shirtSize}').value;
+    var trouserLength = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.trouserLength}').value;
+    var waist = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.waist}').value;
+    var outfitType = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.outfitType}').value;
+    var pantShape = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.pantShape}').value;
+    var shirtShape = document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.shirtShape}').value;
+    window.location.href = '/apex/RequestBoxDetails?shirtSize='+shirtSize+'&trouserLength='+trouserLength+'&waist='+waist+'&outfitType='+outfitType+'&pantShape='+pantShape+'&shirtShape='+shirtShape+'&accountName='+accountName+'&accountEmail='+accountEmail+'&accountPhone='+accountPhone+'&accountUsername='+accountUsername+'&accountPassword='+accountPassword;
+}
+function previousPage(){
+    window.location.href = '/apex/RegistrationPage?accountName='+accountName+'&accountEmail='+accountEmail+'&accountPhone='+accountPhone+'&accountUsername='+accountUsername+'&accountPassword='+accountPassword;
+}
+window.onload=function(){
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.shirtSize}').value = "{!$CurrentPage.parameters.shirtSize}";
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.trouserLength}').value = "{!$CurrentPage.parameters.trouserLength}";
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.waist}').value = "{!$CurrentPage.parameters.waist}";
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.outfitType}').value = "{!$CurrentPage.parameters.outfitType}";
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.shirtShape}').value = "{!$CurrentPage.parameters.shirtShape}";
+    document.getElementById('{!$Component.outfitForm.outfitPageBlock.outfitPageBlockSection.pantShape}').value = "{!$CurrentPage.parameters.pantShape}";
+};
+</script>
+    <!--<c:importvisualstrap />
+    <c:visualstrapblock >-->
+    <apex:form id="outfitForm">
+        <apex:pageBlock id="outfitPageBlock">
+            <apex:pageBlockSection id="outfitPageBlockSection" title="Enter Outfit Details" columns="1">
+                <apex:inputField id="shirtSize" value="{!Outfit__c.Shirt_Size__c}"/>
+                <apex:inputField id="trouserLength" value="{!Outfit__c.Trouser_Length__c}"/>
+                <apex:inputField id="waist" value="{!Outfit__c.Waist__c}"/>
+                <apex:inputField id="outfitType" value="{!Outfit__c.Outfit_Type__c}"/>
+                <apex:inputField id="pantShape" value="{!Outfit__c.Pant_Shape__c}"/>
+                <apex:inputField id="shirtShape" value="{!Outfit__c.Shirt_Shape__c}"/>
+            </apex:pageBlockSection>
+            <apex:commandButton value="Back" onclick="previousPage();" style="float:left" rerender="null"/>
+            <apex:commandButton value="Next" style="float:right" onclick="showdetails();" rerender="null"/>
+        </apex:pageBlock>
+    </apex:form>
+    <!--</c:visualstrapblock>  -->
+</apex:page>

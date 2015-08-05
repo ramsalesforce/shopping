@@ -1,0 +1,19 @@
+<apex:page controller="HomePageController">
+  <apex:form >
+  <!-- test addoutfit kart -->
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+              <apex:inputField value="{!outfitObj.Shirt_Size__c}"/>
+              <apex:inputField value="{!outfitObj.Trouser_Length__c}"/>
+              <apex:inputField value="{!outfitObj.Waist__c}"/>
+              <apex:inputField value="{!outfitObj.Outfit_Type__c}"/>
+              <apex:inputField value="{!outfitObj.Pant_Shape__c}"/>
+              <apex:inputField value="{!outfitObj.Shirt_Shape__c}"/>
+          </apex:pageBlockSection>
+          <apex:pageBlockButtons >
+              <apex:commandButton value="Save" action="{!saveNewOutfit}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

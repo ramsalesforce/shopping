@@ -1,0 +1,22 @@
+<apex:page controller="HomePageController">
+  <apex:form >
+      <apex:pageBlock >
+      <apex:pageMessages id="myMsg"></apex:pageMessages>
+          <apex:pageBlockSection >
+              <apex:outputField value="{!productDetails.Name}"/>
+              <apex:outputField value="{!productDetails.ProductCode}"/>
+              <apex:outputField value="{!productDetails.PricebookEntries[0].UnitPrice}"/>
+              <apex:image url="{!URLFOR($Action.Attachment.Download,productDetails.Attachments[0].Id)}" width="200px" height="200px" />
+              <apex:outputLink value="/apex/BuyProduct?pid={!productDetails.id}&aid={!account.id}&price={!productDetails.PricebookEntries[0].UnitPrice}&type={!productDetails.Type__c}" style="float:right">Buy Now</apex:outputLink>
+              <apex:outputLink value="/apex/AddToCart?pid={!productDetails.id}&aid={!account.id}&price={!productDetails.PricebookEntries[0].UnitPrice}&type={!productDetails.Type__c}">Add To Cart</apex:outputLink>
+              <!--<apex:commandLink value="Add to Cart.." action="{!addToCart}">
+                  <apex:param name="pId" value="{!productDetails.Id}" assignTo="{!pId}"/>
+                  <apex:param name="accId" value="{!account.Id}" assignTo="{!accId}"/>
+                  <apex:param name="unitPrice" value="{!productDetails.PricebookEntries[0].UnitPrice}" assignTo="{!unitPrice}"/>
+                  <apex:param name="myOrderType" value="{!productDetails.Type__c}" assignTo="{!myOrderType}"/>
+              </apex:commandLink>-->
+              <apex:commandLink value="Back" action="{!cancel}"/>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

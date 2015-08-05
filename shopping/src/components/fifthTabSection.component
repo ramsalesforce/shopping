@@ -1,0 +1,21 @@
+<apex:component controller="HomePageController" allowDML="true">
+    <apex:pageBlock title="Cart Items">
+        <apex:pageBlockTable value="{!cartList}" var="cl" >
+            <apex:column headerValue="Action" rendered="{!cartList.size>0}">
+                <apex:outputLink value="/apex/DeleteCartItem?cid={!cl.id}&aid={!account.Id}" onclick="if(!confirm('Are you sure?')){return false;}">Delete</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!cl.Account__c}"/>
+            <apex:column value="{!cl.Product__c}"/>
+            <apex:column value="{!cl.Unit_Price__c}"/>
+            <apex:column >
+                <!--<apex:outputLink value="/apex/BuyProduct?pid={!cl.Product__c}&aid={!cl.Account__c}&cid={!cl.Id}&price={!cl.Unit_Price__c}&type={!cl.Type__c}">Buy Now</apex:outputLink>-->
+                <apex:outputLink value="/apex/BuyProduct?cid={!cl.Id}&aid={!cl.Account__c}">Buy Now</apex:outputLink>
+            </apex:column>
+            
+        </apex:pageBlockTable>
+        <!--<apex:commandLink value="Buy All" action="{!buyAllProductsInCart}" style="float:right" rendered="{!cartList.size>1}">
+            <apex:param name="aid" value="{!account.Id}" assignTo="{!accId}"/>
+        </apex:commandLink>-->
+        <apex:outputLink value="/apex/ConfirmShipmentDetails?aid={!account.Id}" rendered="{!cartList.size>1}" style="float:right">Buy All</apex:outputLink>
+    </apex:pageBlock>
+</apex:component>

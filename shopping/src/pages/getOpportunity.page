@@ -1,0 +1,21 @@
+<apex:page standardController="Opportunity" extensions="SubOpportunityController" docType="html-5.0">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages />
+            <apex:pageBlockSection title="Sub Opportunity Details">
+                Sub Opportunity Type<apex:selectList id="selectListValues" value="{!subOppType}" size="1">
+                    <apex:selectOptions value="{!subOppTypeOptions}"></apex:selectOptions>
+                </apex:selectList>
+                Sub Opp Name<apex:inputText value="{!subOppName}"/>
+                Stage<apex:selectList value="{!stageName}" size="1">
+                	<apex:selectOptions value="{!stageOptions}"></apex:selectOptions>
+                </apex:selectList>
+                Close Date<apex:input type="date" value="{!closeDate}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" />
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

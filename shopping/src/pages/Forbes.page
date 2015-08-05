@@ -1,0 +1,27 @@
+<apex:page controller="ForbesNews" sidebar="false">
+   <head>
+        <apex:stylesheet value="{!$Resource.jqueryuicss}"/>
+   </head>
+  <apex:form >
+  <apex:pageBlock >
+     <apex:pageBlockSection title="Select A News Type">
+          <apex:selectList size="1" multiselect="false" value="{!selectedNewsType}">
+              <apex:selectOptions value="{!newsType}"></apex:selectOptions>
+              <apex:actionSupport event="onchange" action="{!displayNews}"/>
+          </apex:selectList>
+     </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>
+  <apex:pageMessages ></apex:pageMessages>
+   <apex:repeat value="{!newsList}" var="news">
+     <apex:pageBlock >
+      <apex:pageBlockSection showHeader="true" title="{!news.title}" rendered="{!newsList.size>0}">
+          <apex:outputLabel >{!news.publishedOn} </apex:outputLabel>
+          <apex:outputPanel styleClass="ui-widget">
+              {!news.description}<p/>
+              <a href='{!news.link}'>Details</a>
+          </apex:outputPanel>
+       </apex:pageBlockSection>
+     </apex:pageBlock>
+   </apex:repeat>
+</apex:page>

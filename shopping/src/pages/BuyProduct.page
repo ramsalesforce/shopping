@@ -1,0 +1,20 @@
+<apex:page controller="HomePageController" tabStyle="My_Order__c">
+<apex:form >
+  <apex:pageBlock >
+      <apex:pageBlockSection title="{!MyOrder.Product__r.Type__c}">
+          <apex:outputField value="{!MyOrder.Account__c}"/>
+          <apex:outputField value="{!MyOrder.Product__c}"/>
+          <apex:inputField value="{!MyOrder.Size__c}" rendered="{!(MyOrder.Type__c == 'T Shirts' || MyOrder.Type__c == 'Formal Shirts' || MyOrder.Type__c == 'Casual Shirts' || MyOrder.Type__c == 'Night Wears')}"/>
+          <apex:inputField value="{!MyOrder.Waist__c}" rendered="{!(MyOrder.Type__c == 'Jeans' || MyOrder.Type__c == 'Formal Pants' || MyOrder.Type__c == 'Night Wears')}"/>
+          <apex:inputField value="{!MyOrder.Quantity__c}"/>
+          <apex:outputField value="{!MyOrder.Price__c}"/>
+          <apex:inputField value="{!MyOrder.Color__c}"/>
+          <apex:inputField value="{!MyOrder.Address__c}"/>
+          <apex:inputField value="{!MyOrder.Mode_Of_Payment__c}"/>         
+      </apex:pageBlockSection>
+      <apex:commandButton value="Send Order" action="{!sendOrder}"/>
+      <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"/>
+  </apex:pageBlock>
+  
+</apex:form>
+</apex:page>

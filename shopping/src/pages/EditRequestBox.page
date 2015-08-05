@@ -1,0 +1,71 @@
+<apex:page controller="HomePageController">
+<apex:form >
+<apex:pageBlock >
+    <apex:commandLink value="[Sign Out]" action="{!signOut}" style="float:right"/>
+    <apex:outputText value="{!userName}" style="float:right"/>
+    <apex:tabPanel switchType="client" selectedTab="name4" id="theTabPanel">
+        <apex:tab label="Home" name="name1" id="tabOne">
+            <c:firstTabSection ></c:firstTabSection>
+        </apex:tab>
+
+        <apex:tab label="Account Details" name="name2" id="tabTwo">
+            <c:secondTabSection ></c:secondTabSection>
+        </apex:tab>
+        
+        <apex:tab label="Outfit Details" name="name3" id="tabThree">
+            <c:thirdTabSection ></c:thirdTabSection>
+        </apex:tab>
+        
+        <apex:tab label="Request Box" name="name4" id="tabFour">
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                    <apex:inputField value="{!req.Shirt_Type__c}"/>
+                    <apex:inputField value="{!req.Trouser_Type__c}"/>
+                    <apex:inputField value="{!req.Outwear__c}"/>
+                    <apex:inputField value="{!req.Accessories__c}"/>
+                    <apex:inputField value="{!req.Purpose__c}"/>
+                    <apex:inputField value="{!req.Date__c}"/>
+                    <apex:inputField value="{!req.Notes_and_Comments__c}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Save" action="{!saveRequestBox}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:tab>
+        
+        <apex:tab label="Cart Items" name="name5" id="tabFive">
+            <apex:pageBlock title="Cart Items">
+                <apex:pageBlockTable value="{!cartList}" var="cl">
+                    <apex:column headerValue="Action">
+                        <!--<apex:outputLink value="/apex/EditCartDetails?cid={!cl.id}&aid={!account.Id}">Edit</apex:outputLink>&nbsp;|&nbsp;-->
+                        <apex:outputLink value="/apex/DeleteCartItem?cid={!cl.id}&aid={!account.Id}" onclick="if(!confirm('Are you sure?')){return false;}">Delete</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!cl.Account__c}"/>
+                    <apex:column value="{!cl.Product__c}"/>
+                    <apex:column >
+                        <apex:outputLink value="/apex/BuyProduct?pid={!cl.Product__c}&aid={!cl.Account__c}&cid={!cl.Id}">Buy Now</apex:outputLink>
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:commandButton value="Buy All" action="{!buyAllProductsInCart}" style="float:right"/>
+            </apex:pageBlock>
+        </apex:tab>
+        
+        <apex:tab label="My Orders" name="name6" id="tabSix">
+            <apex:pageBlock title="Ordered Items">
+                <apex:pageBlockTable value="{!myOrders}" var="myOdr">
+                    <apex:column value="{!myOdr.Account__c}"/>
+                    <apex:column value="{!myOdr.Product__c}"/>
+                    <apex:column value="{!myOdr.Color__c}"/>
+                    <apex:column value="{!myOdr.Size__c}"/>
+                    <apex:column value="{!myOdr.Quantity__c}"/>
+                    <apex:column value="{!myOdr.Address__c}"/>
+                    <apex:column value="{!myOdr.Mode_Of_Payment__c}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:tab>
+
+    </apex:tabPanel>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

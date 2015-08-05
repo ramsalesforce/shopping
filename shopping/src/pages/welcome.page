@@ -1,0 +1,33 @@
+<apex:page controller="HomePageController" sidebar="false">
+    <apex:pageMessages id="myMsg"></apex:pageMessages>
+    <apex:form >
+        <apex:pageBlock >
+        <apex:commandLink value="[Sign Out]" action="{!signOut}" style="float:right"/>
+        <apex:outputText value="{!userName}" style="float:right"/>
+            <apex:tabPanel switchType="Client" selectedTab="name1" id="theTabPanel">
+            
+                <apex:tab label="Home" name="name1" id="tabOne">
+                    <c:firstTabSection ></c:firstTabSection>
+                </apex:tab>
+        
+                <apex:tab label="Account Details" name="name2" id="tabTwo">
+                    <c:secondTabSection ></c:secondTabSection>
+                </apex:tab>
+                
+                <apex:tab label="Outfit Details" name="name3" id="tabThree">
+                    <c:thirdTabSection ></c:thirdTabSection>
+                </apex:tab>
+                
+                <apex:tab label="Request Box" name="name4" id="tabFour">
+                    <c:fourthTabSection ></c:fourthTabSection>
+                </apex:tab>
+                <apex:tab label="Cart Items" name="name5" id="tabFive">
+                    <c:fifthTabSection ></c:fifthTabSection>
+                </apex:tab>
+                <apex:tab label="My Orders" name="name6" id="tabSix">
+                    <c:sixthTabSection ></c:sixthTabSection>
+                </apex:tab>
+            </apex:tabPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

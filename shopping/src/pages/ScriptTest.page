@@ -1,0 +1,31 @@
+<apex:page standardController="Account" docType="html-5.0">
+    <apex:includeScript value="{!$Resource.jqueryui}"/>
+    <apex:includeScript value="{!$Resource.jqueryCore}"/>
+    <apex:includeScript value="{!$Resource.jqueryuicss}"/>
+    <script type="text/javascript">
+        var jQ = jQuery.noConflict();
+        jQ(document).ready(function(){
+            jQ('.outputTextId3').html('outputText using Id');
+        });
+        function validate(){
+            if(jQ('input[id$=name]').val() == ''){
+                alert("Account Name is Mandatory");
+            }
+        } 
+    </script>
+    <apex:form id="myForm">
+        <apex:pageBlock id="myPageBlock">
+            <apex:pageBlockSection id="myPageBlockSection">
+                <apex:inputField id="name" value="{!account.Name}" ></apex:inputField>
+                <apex:inputField id="accountNumber" required="true" value="{!account.AccountNumber}"></apex:inputField>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons id="myButtons">
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton value="Cancel" html-formnovalidate="formnovalidate" immediate="true"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:outputPanel >
+        <apex:outputText id="outputTextId"  styleClass="outputTextId outputTextId2 outputTextId3 outputTextId4 outputTextId5"></apex:outputText>
+    </apex:outputPanel>
+</apex:page>

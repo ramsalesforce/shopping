@@ -1,0 +1,14 @@
+<apex:component controller="HomePageController" allowDML="true">
+  <apex:pageBlock title="Account Details">
+                <apex:pageBlockSection >
+                    <apex:outputField value="{!account.Name}"/>
+                    <apex:outputField value="{!account.Email__c}"/>
+                    <apex:outputField value="{!account.Phone}"/>
+                    <apex:outputField value="{!account.Username__c}"/>
+                    <apex:outputField value="{!account.Password__c}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Edit" action="{!edit}"/>
+                </apex:pageBlockButtons>
+  </apex:pageBlock>
+</apex:component>
