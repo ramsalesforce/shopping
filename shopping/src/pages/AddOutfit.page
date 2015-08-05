@@ -16,5 +16,6 @@
           </apex:pageBlockButtons>
       </apex:pageBlock>
       <!-- first alteration -->
+      <!-- second alteration -->
   </apex:form>
 </apex:page>
