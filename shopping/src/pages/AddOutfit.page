@@ -15,5 +15,6 @@
               <apex:commandButton value="Cancel" action="{!cancel}"/>
           </apex:pageBlockButtons>
       </apex:pageBlock>
+      <!-- first alteration -->
   </apex:form>
 </apex:page>
